@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<!-- saved from url=(0037)http://huisky.com/blog/17050219105882 -->
+<html class="js cssanimations" lang="zh-hans"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="ActFramework,Java,MVC,框架 原文链接：https://my.oschina.net/greenlaw110/blog/890913                                                            # #128 缓存...">
+    <meta name="keywords" content="缓存,ActFramework,Java,MVC,框架">
+    <meta name="sogou_site_verification" content="OF0THG8Sg2">
+    <meta name="shenma-site-verification" content="1ccf2ec94d90fd9eef63eb710f2f664b_1494655580"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ActFramework r1.3.0 - 激动人心的特性一览 - 缓存 - 辉色天空</title>
+    <!-- Set render engine for 360 browser -->
+    <meta name="renderer" content="webkit">
+    <!-- No Baidu Siteapp-->
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <link rel="shortcut icon" href="http://huisky.com/assets/i/favicon.ico">
+    <link rel="bookmark" href="http://huisky.com/assets/i/favicon.ico">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="72*72" href="http://huisky.com/assets/i/huisky372.ico">
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI">
+    <link rel="apple-touch-icon-precomposed" sizes="72*72" href="http://huisky.com/assets/i/huisky372.ico">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="/assets/i/huisky372.ico">
+    <meta name="msapplication-TileColor" content="#0e90d2">
+
+    <link href="./huisky.css" rel="stylesheet">
+    <link href="./cssblog" rel="stylesheet">
+	
+	<script src="./ActFramework r1.3.0_files/push.js.downloadQ"></script>
+	<script src="./ActFramework r1.3.0_files/hm.js.downloadQ"></script>
+	<script>
+        /*(function () {
+            var src = (document.location.protocol == "http:") ? "http://js.passport.qihucdn.com/11.0.1.js?5f67ee9487dbabaaa037dcd573ce9c76" : "https://jspassport.ssl.qhimg.com/11.0.1.js?5f67ee9487dbabaaa037dcd573ce9c76";
+            document.write('<script src="' + src + '" id="sozz"><\/script>');
+        })();*/
+    </script>
+	<script src="./ActFramework r1.3.0_files/11.0.1.js.downloadQ" id="sozz"></script>
+	<script charset="utf-8" src="./ActFramework r1.3.0_files/ab77b6ea7f3fbf79.js.downloadQ"></script>
+
+    <!--baidutongji-->
+	<script>// var _hmt = _hmt || []; (function () { var hm = document.createElement("script"); hm.src = "https://hm.baidu.com/hm.js?6c37e9ca51f79abdeabd618674230c17"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(hm, s); })(); </script>
+	<script src="./ActFramework r1.3.0_files/share.js.downloadQ"></script>
+	<link rel="stylesheet" href="./ActFramework r1.3.0_files/share_style0_24.css">
+</head>
+<body>
+    <!--[if lte IE 9]>
+    <p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>
+      以获得更好的体验！</p>
+    <![endif]-->
+    <div>
+        <header id="header" class="am-topbar am-topbar-inverse ">
+            <div class="am-container">
+                <div class="am-topbar-brand">
+                    <a href="http://huisky.com/" target="_blank"> <img src="./ActFramework r1.3.0_files/headlogo.png" height="30" width="90" alt="辉色天空" data-bd-imgshare-binded="1"> 辉色天空</a>
+                </div>
+                <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: &#39;#doc-topbar-collapse&#39;}">
+                    <span class="am-sr-only">导航切换</span>
+                    <span class="am-icon-bars"></span>
+                </button>
+                <div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse">
+                    <ul class="am-nav am-nav-pills am-topbar-nav">
+                        <li><a href="http://huisky.com/" target="_blank">首页</a></li>
+
+                        <li class="am-dropdown" data-am-dropdown="">
+                            <a class="am-dropdown-toggle" data-am-dropdown-toggle="" href="javascript:;">
+                                编程技术 <span class="am-icon-caret-down"></span>
+                            </a>
+                            <ul class="am-dropdown-content">
+                                <li><a href="http://huisky.com/home/index?type1=1" target="_blank">全部</a></li>
+                                <li><a href="http://huisky.com/home/index?type2=20" target="_blank">Java</a></li>
+                                <li><a href="http://huisky.com/home/index?type2=50" target="_blank">Mysql</a></li>
+                                <li><a href="http://huisky.com/home/index?type2=37" target="_blank">Python</a></li>
+                                <li><a href="http://huisky.com/home/index?type2=29" target="_blank">javascript</a></li>
+                                <li><a href="http://huisky.com/home/index?type2=40" target="_blank">Android</a></li>
+                                <li><a href="http://huisky.com/home/index?type2=27" target="_blank">数据库</a></li>
+                                <li><a href="http://huisky.com/home/index?type2=31" target="_blank">C#</a></li>
+                                <li><a href="http://huisky.com/home/index?type2=6" target="_blank">前端框架</a></li>
+                                <li><a href="http://huisky.com/home/index?type2=14" target="_blank">Electron</a></li>
+                                <li><a href="http://huisky.com/home/index?tag=CefSharp" target="_blank">CefSharp</a></li>
+                            </ul>
+                        </li>
+                        <li class="am-dropdown" data-am-dropdown="">
+                            <a class="am-dropdown-toggle" data-am-dropdown-toggle="" href="javascript:;">
+                                操作系统 <span class="am-icon-caret-down"></span>
+                            </a>
+                            <ul class="am-dropdown-content">
+                                <li><a href="http://huisky.com/home/index?type1=69" target="_blank">全部</a></li>
+                                <li><a href="http://huisky.com/home/index?type2=70" target="_blank">linux</a></li>
+                                <li><a href="http://huisky.com/home/index?type2=106" target="_blank">windows</a></li>
+                                <li><a href="http://huisky.com/home/index?type2=72" target="_blank">shell</a></li>
+                                <li><a href="http://huisky.com/home/index?type2=74" target="_blank">centos</a></li>
+                                <li><a href="http://huisky.com/home/index?type2=105" target="_blank">ubuntu</a></li>
+                                <li><a href="http://huisky.com/home/index?type2=140" target="_blank">Mac</a></li>
+                                <li><a href="http://huisky.com/home/index?type2=159" target="_blank">交换机</a></li>
+                                <li><a href="http://huisky.com/home/index?type2=160" target="_blank">路由器</a></li>
+                            </ul>
+                        </li>
+                        <li class="am-dropdown" data-am-dropdown="">
+                            <a class="am-dropdown-toggle" data-am-dropdown-toggle="" href="javascript:;">
+                                网站运营 <span class="am-icon-caret-down"></span>
+                            </a>
+                            <ul class="am-dropdown-content">
+                                <li><a href="http://huisky.com/home/index?type1=9" target="_blank">全部</a></li>
+                                <li><a href="http://huisky.com/home/index?type2=19" target="_blank">网站优化</a></li>
+                                <li><a href="http://huisky.com/home/index?type2=23" target="_blank">SEO</a></li>
+                                <li><a href="http://huisky.com/home/index?type2=26" target="_blank">建站</a></li>
+                                <li><a href="http://huisky.com/home/index?type2=180" target="_blank">营销</a></li>
+                            </ul>
+                        </li>
+                        <li class="am-dropdown" data-am-dropdown="">
+                            <a class="am-dropdown-toggle" data-am-dropdown-toggle="" href="javascript:;">
+                                常用软件 <span class="am-icon-caret-down"></span>
+                            </a>
+                            <ul class="am-dropdown-content">
+                                <li><a href="http://huisky.com/home/index?type1=3">全部</a></li>
+                                <li><a href="http://huisky.com/home/index?type2=11">开发工具</a></li>
+                                <li><a href="http://huisky.com/home/index?type2=15">开发辅助</a></li>
+                                <li><a href="http://huisky.com/home/index?type2=16">系统工具</a></li>
+                                <li><a href="http://huisky.com/home/index?type2=18">Android</a></li>
+                                <li><a href="http://huisky.com/home/index?type2=10">媒体工具</a></li>
+                                <li><a href="http://huisky.com/home/index?type2=17">图像处理</a></li>
+                            </ul>
+                        </li>
+                        
+
+                        
+                        <li><a href="http://huisky.com/home/about" target="_blank">关于</a></li>
+
+                    </ul>
+
+
+                    <form name="f1" onsubmit="return g(this)" target="_blank" class="am-topbar-form am-topbar-left am-form-inline" role="search">
+                        <div class="am-form-group">
+                            <input type="text" class="am-form-field am-input-sm" name="word" onfocus="checkHttps" size="20" maxlength="100">
+                        </div>
+                        <input type="submit" class="am-btn am-btn-default am-btn-sm" value="搜索"><br>
+                        <input name="tn" type="hidden" value="SE_zzsearchcode_shhzc78w">
+                        <input name="cl" type="hidden" value="3">
+                        <input name="ct" type="hidden">
+                        <input name="si" type="hidden" value="www.huisky.com">
+                        <div class="mt10" style="display:none">
+                            <input name="s" type="radio"> 互联网<input name="s" type="radio" checked=""> www.baidu.com
+                        </div>
+                    </form>
+                    <script src="./ActFramework r1.3.0_files/BaiduHttps_20150714_zhanzhang.js.downloadQ"></script>
+                    <script>
+                        /*function checkHttps() {
+                            BaiduHttps.useHttps();
+                        };
+                        function g(formname) {
+                            var data = BaiduHttps.useHttps();
+                            var url = '';
+                            url = data.s == 0 ? "http://www.baidu.com/baidu" : 'https://www.baidu.com/baidu' + '?ssl_s=1&ssl_c' + data.ssl_code;
+                            if (formname.s[1].checked) {
+                                formname.ct.value = "2097152";
+                            }
+                            else {
+                                formname.ct.value = "0";
+                            }
+                            formname.action = url;
+                            return true;
+                        };*/
+                    </script>
+                    
+
+                    <div class="am-topbar-right am-hide">
+                        <button id="login" class="am-btn am-btn-primary am-topbar-btn am-btn-sm">
+                            登录
+                        </button>
+                        <button class="am-btn am-btn-primary am-topbar-btn am-btn-sm am-hide">
+                            注册
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="am-g am-g-fixed" style="text-align:center">
+            <script type="text/javascript">
+                document.write(decodeURI("<a href='http://niu57.com/vip.html' target='_blank' >%E7%AB%99%E9%95%BF%E6%8E%A8%E8%8D%90%EF%BC%9A%E4%BC%98%E9%85%B7VIP%E8%A7%86%E9%A2%91%E3%80%81%E7%88%B1%E5%A5%87%E8%89%BAVIP%E8%A7%86%E9%A2%91%E3%80%81%E8%85%BE%E8%AE%AFVIP%E8%A7%86%E9%A2%91%E3%80%81%E4%B9%90%E8%A7%86VIP%E8%A7%86%E9%A2%91%E3%80%81%E8%8A%92%E6%9E%9CVIP%E8%A7%86%E9%A2%91%E5%85%8D%E8%B4%B9%E5%9C%A8%E7%BA%BF%E8%A7%82%E7%9C%8B</a>"));
+            </script><a href="http://niu57.com/vip.html" target="_blank">站长推荐：优酷VIP视频、爱奇艺VIP视频、腾讯VIP视频、乐视VIP视频、芒果VIP视频免费在线观看</a>
+            
+            
+        </div>
+        <div id="main" class="am-g am-g-fixed blog-g-fixed">
+            
+
+<div class="am-u-sm-12 am-u-md-8 am-u-lg-8">
+    <article id="article" class="am-article">
+        <div class="map">
+            <span>
+                <img src="./ActFramework r1.3.0_files/home.png" data-bd-imgshare-binded="1"> &nbsp;当前位置：
+            </span>
+            <span><a href="http://huisky.com/" target="_blank" title="首页">首页</a> </span>&nbsp;&gt;&nbsp;
+            <span><a href="http://huisky.com/home/index?type1=1" target="_blank" title="编程技术">编程技术</a> </span>&nbsp;&gt;&nbsp;
+            <span><a href="http://huisky.com/home/index?type2=108" target="_blank" title="缓存">缓存</a></span>
+        </div>
+        <div class="am-article-hd">
+            <h1 class="am-article-title">ActFramework r1.3.0 - 激动人心的特性一览</h1>
+            <div class="am-article-meta" style="margin:10px 0 10px 0">
+                来源：Oschina
+                时间：2017/5/2 19:11:04 &nbsp;&nbsp;浏览：24 &nbsp;&nbsp;点赞：0 &nbsp;&nbsp;评论：0
+            </div>
+
+            
+        </div>
+
+        
+        <div id="articlebody" class="am-article-bd markdown-body">
+            原文链接：https://my.oschina.net/greenlaw110/blog/890913<br><val data-name="blog_content_type" data-value="markdown"></val>
+                                        <div class="loading-gif" id="blogContentLoading"></div>
+                    <textarea style="display: none;" class="noshow_content"># #128 缓存页面
+
+这个特性允许开发人员通过注解来打开页面缓存：
+
+```java
+    @GetAction
+    @CacheFor
+    public void home() {
+    }
+```
+
+上面的代码将主页缓存1个小时。开发人员也可以制定缓存失效期限，比如下面的代码让缓存在半小时之后失效：
+
+
+```java
+    @GetAction
+    @CacheFor(60 * 30)
+    public void home() {
+    }
+```
+
+注意缓存页面仅仅对 `GET` 请求有效. 但是某些特殊场合，比如 facebook 向应用主页（iframe 内）重定向是采用 POST 请求。这时候我们希望页面缓存对 POST 也有效，可以这样写：
+
+
+```java
+    @GetAction
+    @CacheFor(supportPost = true)
+    public void home() {
+    }
+```
+
+# #163 引入 `@TemplateContext` 注解
+
+在 `r1.3.0` 之前, 除非开发人员在 API 里明确指定模板路径，ActFramework 通过[匹配包，类和方法名字](http://actframework.org/doc/templating.md#location) 来定位模板，例如:
+
+```java
+package com.mycom.myprj;
+
+public class MyController {
+    
+    @GetAction("/")
+    public void home() {
+    }
+
+}
+```
+
+这里和 `home()` 对应的模板应该放在:
+
+```
+resources/rythm/com/mycom/myprj/MyController/home.html
+```
+
+这个规则很简单，非常容易理解和记忆，但在我们拥有一个优秀的 IDE 插件支持之前创建和寻找模板文件都是一件痛苦单调的事情。
+
+现在因为有了 `@TemplateContext` 我们可以大大地缓解这种状况：
+
+```java
+package com.mycom.myprj;
+
+@TemplateContext("/my")
+public class MyController {
+    
+    @GetAction("/")
+    public void home() {
+    }
+
+}
+```
+
+根据以上代码 ActFramework 在下面的路径寻找 `home()` 对应的模板：
+
+```
+resources/rythm/my/home.html
+```
+
+变得清爽多了，不是吗？
+
+# #164 分解 `@Controller` 注解到 `@UrlContext` 和 `@Port`
+
+我们刚刚引入了 `@TemplateContext`, 现在我们希望搞一个对应的: `@UrlContext`, 用来制定一个控制器类下所有的响应方法的 URL context。
+
+实际上我们已经有了这个概念，不过是通过 `act.controller.Controller` 注解提供的, 如下例所示:
+
+```java
+@Controller("admin")
+public class Admin {
+
+    @GetAction
+    public String home() {
+    }
+
+}
+```
+
+现在我们通过引入 `@UrlContext` 注解让这个概念更加清晰：
+
+```java
+@UrlContext("admin")
+public class Admin {
+
+    @GetAction
+    public String home() {
+    }
+
+}
+```
+
+这段代码对我来讲更加清晰，因为 `admin` 作为 URL context 的含义被明显指定了.
+
+在 `@Controller` 注解中还有另一个概念：命名端口，如下例所示:
+
+```java
+@Controller(port = "admin")
+public class Admin {
+
+    @GetAction
+    public String home() {
+    }
+
+}
+```
+
+如果应用的配置文件中有下列配置：
+
+```
+namedPorts=admin:5462
+```
+
+上面的代码表示 `Admin` 类里面的响应器只会处理发送到 `5462` 端口的请求。
+
+我们不希望把命名端口指定放进 `@UrlContext` 注解. 因此引入了另一个注解来处理命名端口： `Port`:
+
+```java
+@Port("admin")
+public class Admin {
+
+    @GetAction
+    public String home() {
+    }
+
+}
+```
+
+这段使用 `@Port` 的代码比上面使用 `@Controller(port = "admin")` 的代码更简单清楚.
+
+# #168 让所有的扫描器处理 `@Env` 相关注解
+
+ActFramework 有三个和 `Env`（环境）相关的注解，用于在特定运行环境开关一些逻辑/特性例如：
+
+```java
+@Env.Mode(PROD)
+public class ModuleForProd extends Module {
+    @Override
+    protected void configure() {
+        bind(HiService.class).to(HiServiceImpl.class);
+        bind(ByeService.class).to(ByeServiceImpl.class);
+    }
+}
+```
+
+上面的代码表示只有当应用运行在 `prod` 模式下依赖注入模块 `ModuleForProd` 才会被调用配置. 
+
+这个 `#168` issue 让 `Env` 注解的含义扩充到所有的类扫描器，比如：
+
+```java
+@Env.Group("test")
+public class TestController {
+   ...
+}
+```
+
+```java
+@Env.Group(value = "test", unless = true)
+public class NoTestController {
+   ...
+}
+```
+
+上面的代码表示当前环境是 `test` 组的时候 `TestController` 才生效，而 `NoTestController` 则正好相反，只有当前环境不是 `test` 组才生效
+
+# #169 路径中新的正则表达式变量
+
+ActFramework 支持在路由中指定正则表达式变量，例如:
+
+```java
+    @GetAction("/int/{&lt;[0-9]+&gt;n}")
+    public int n(int n) {
+        return n;
+    }
+```
+
+`r1.3.0` 版引入了另外两种表达法：
+
+```java
+    @GetAction("/int/{n&lt;[0-9]+&gt;}")
+    public int n(int n) {
+        return n;
+    }
+```
+
+和
+
+```java
+    @GetAction("/int/n:[0-9]+")
+    public int n(int n) {
+        return n;
+    }
+```
+
+# #170 更容易地定制全局模板变量
+
+在 `r1.3.0` 之前创建全局模板变量的过程是很繁复的。首先需要建立一个新项目, 然后创建一个 `ImplicitVariableProvider` 插件的实现类, 编译并发布这个插件项目作为单独的 jar 库，然后才能在应用项目中使用其中定义的全局变量。
+
+`r1.3.0` 版提供了一种新的机制让应用可以非常轻松自由地定于全局模板变量：
+
+```java
+    @ProvidesImplicitTemplateVariable("foo")
+    public String foo() {
+        return "bar";
+    }
+
+    @ProvidesImplicitTemplateVariable("bar")
+    public static int bar() {
+        return 3;
+    }
+
+    @ProvidesImplicitTemplateVariable("reqUrl")
+    public static String url(H.Request request) {
+        return request.url();
+    }
+```
+
+上面的代码定义了三个全局模板变量： `foo`, `bar` 和 `reqUrl`. 注意 `reqUrl` 变量的方法上有个 `H.Request` 类型的参数, 这个没有问题，只要参数是可以被注入的，ActFramework 都能够处理。
+
+# #171 提供一个 jQuery 增强 javascript 库 
+
+这个增强库可以通过 `/asset/act/js/jquery.ext.js` 引入，提供如下功能：
+
+```
+$.put(url, [data], function)
+$.patch(url, [data], function)
+$.delete(url, [data], function)
+$.postJSON(url, [data], function)
+$.putJSON(url, [data], function)
+$.patchJSON(url, [data], function)
+$.deleteJSON(url, [data], function)
+```
+
+另外这个库能够处理针对 ajax 请求的 278 重定向响应. 参见 [这个 SO](http://stackoverflow.com/questions/199099/how-to-manage-a-redirect-request-after-a-jquery-ajax-call)
+
+# #174 支持 profile 特定的路由配置
+
+除了通过注解，ActFramework 从 `resources/routes.conf` 文件中读取路由配置. 新版本我们提供了 profile 特定路由配置的功能，框架会从下面的文件中读取配置：
+
+```
+resources/routes.conf
+resources/conf/routes.conf
+resources/conf/common/routes.conf
+resources/conf/{profile}/routes.conf
+```
+
+其中 `{profile}` 是当前运行的 profile 名字
+
+# #175 当增强类出错的时候提供更友好的错误报告
+
+以前当发生类增强错误的时候看不到任何错误报告：
+
+![](https://cloud.githubusercontent.com/assets/216930/25514141/fd4be09e-2c1d-11e7-85ba-d073ea75c1a4.png)
+
+`r1.3.0` 改进了这个地方，可以看到很清晰的错误报告：
+
+![](https://cloud.githubusercontent.com/assets/216930/25605787/c6adbcde-2f50-11e7-83f2-4660c12050ad.png)
+
+# #177 当控制器响应方法或拦截器方法重名时提供友好的错误报告
+
+ActFramework 不允许响应器/拦截器方法重名。过去关于这点没有清晰的错误报告，而开发人员会因为违反了这个规定而出现不知所措的局面. 现在的关于这种错误的报告可以非常明确的告诉程序员问题所在：
+
+![](https://cloud.githubusercontent.com/assets/216930/25550325/8d34b8e6-2cbb-11e7-9e89-24b63f1aea86.png)
+
+# #179 提供注解来标识需要输出到模板变量的字段或者方法参数
+
+在 `r1.3.0` 版中引入了一个新的注解 `@Output` 来标明某个字段或者方法参数需要输入到模板变量列表。代码演示：
+
+常规方法:
+
+```java
+@UrlContext("/my")
+public class MyController {
+  
+  @LoginUser
+  private User me;
+  
+  @GetAction("order/{id}")
+  public void order(@DbBind @NotNull Order order) {
+    render(me, order); // put me and order into the render arguments
+  }
+
+}
+```
+
+使用 `@Output` 注解的新方法：
+
+```java
+@UrlContext("/my")
+public class MyController {
+  
+  @LoginUser
+  @Output
+  private User me;
+  
+  @GetAction("order/{id}")
+  public void order(@DbBind @NotNull @Output Order order) {}
+
+}
+```
+
+# #181 让 `redirect` API 接受控制器的 URL context
+
+`r1.3.0` 对 `redirect` API 做了一点改变，让开发人员更容易指定重定向 URL
+
+原来的方式:
+
+```java
+@Controller("/admin")
+public class AdminController {
+
+    @GetAction("login")
+    public void loginForm(){}    
+
+    @GetAction("logout")
+    public void logout(H.Session session) {
+        session.clear();
+        redirect("/admin/login"); // 这里必须放 URL 全路径
+    }
+
+    ...
+}
+```
+
+新方式：
+
+```java
+@UrlContext("/admin")
+public class AdminController {
+
+    @GetAction("login")
+    public void loginForm(){}    
+
+    @GetAction("logout")
+    public void logout(H.Session session) {
+        session.clear();
+        redirect("login"); // 只需放针对 URL context `/admin` 相对的路径
+    }
+
+    ...
+}
+```</textarea>
+                    <div class="BlogContent"></div><br>本文链接：http://huisky.com/blog/17050219105882<br>以上就是本文的全部内容，希望对大家的学习有所帮助，也希望大家多多支持HuiSky辉色天空。
+
+        </div>
+        <div class="am-text-xs am-u-sm-12" style="margin:10px 0 10px 0">
+            标签 ：<span class="blog-tags">
+                        <a href="http://huisky.com/home/index?tag=ActFramework" rel="tag" target="_blank">ActFramework</a>
+                        <a href="http://huisky.com/home/index?tag=Java" rel="tag" target="_blank">Java</a>
+                        <a href="http://huisky.com/home/index?tag=MVC" rel="tag" target="_blank">MVC</a>
+                        <a href="http://huisky.com/home/index?tag=%E6%A1%86%E6%9E%B6" rel="tag" target="_blank">框架</a>
+
+            </span>
+            <span class="am-fr">
+                2017/5/2 19:11:04
+            </span>
+        </div>
+        <div class="bdsharebuttonbox bdshare-button-style0-24" data-bd-bind="1502258509442"><a href="http://huisky.com/blog/17050219105882#" class="bds_more" data-cmd="more"></a><a href="http://huisky.com/blog/17050219105882#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="http://huisky.com/blog/17050219105882#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="http://huisky.com/blog/17050219105882#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="http://huisky.com/blog/17050219105882#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="http://huisky.com/blog/17050219105882#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a></div>
+
+        
+
+
+        
+
+        <div class="relates relates-model-text am-text-sm">
+            <h3 class="title"><strong>同类热文</strong></h3>
+            <ul>
+                            <li>
+                                <a target="_blank" href="http://huisky.com/blog/17042301581081" title="北哥大话Yii2缓存机制 - DbCache">
+                                    北哥大话Yii2缓存机制 - DbCache
+                                </a>
+                            </li>
+                            <li>
+                                <a target="_blank" href="http://huisky.com/blog/17042302070911" title="揭秘Spark应用性能调优">
+                                    揭秘Spark应用性能调优
+                                </a>
+                            </li>
+                            <li>
+                                <a target="_blank" href="http://huisky.com/blog/17062810582399" title="java亿级流量电商详情页系统的大型高并发与高可用缓存架构实战视频教程">
+                                    java亿级流量电商详情页系统的大型高并发与高可用缓存架构实战视频教程
+                                </a>
+                            </li>
+                            <li>
+                                <a target="_blank" href="http://huisky.com/blog/17042522004314" title="DnsFlushResolverCache 清除windows DNS缓存">
+                                    DnsFlushResolverCache 清除windows DNS缓存
+                                </a>
+                            </li>
+                            <li>
+                                <a target="_blank" href="http://huisky.com/blog/17042301581269" title="秒杀系统优化方案之缓存、队列、锁设计思路">
+                                    秒杀系统优化方案之缓存、队列、锁设计思路
+                                </a>
+                            </li>
+                            <li>
+                                <a target="_blank" href="http://huisky.com/blog/17042301581398" title="[译] 设计一个现代的缓存">
+                                    [译] 设计一个现代的缓存
+                                </a>
+                            </li>
+                            <li>
+                                <a target="_blank" href="http://huisky.com/blog/17050422393860" title="怎么判断一个APP是原生APP、混合APP还是WEB APP ?">
+                                    怎么判断一个APP是原生APP、混合APP还是WEB APP ?
+                                </a>
+                            </li>
+                            <li>
+                                <a target="_blank" href="http://huisky.com/blog/17042301581325" title="北哥大话Yii2缓存机制 - File缓存">
+                                    北哥大话Yii2缓存机制 - File缓存
+                                </a>
+                            </li>
+                            <li>
+                                <a target="_blank" href="http://huisky.com/blog/17042301562387" title="学习笔记之Memcached原理">
+                                    学习笔记之Memcached原理
+                                </a>
+                            </li>
+                            <li>
+                                <a target="_blank" href="http://huisky.com/blog/17042301581170" title="北哥大话Yii2缓存机制 - 缓存依赖">
+                                    北哥大话Yii2缓存机制 - 缓存依赖
+                                </a>
+                            </li>
+
+            </ul>
+        </div>
+
+    </article>
+
+    <div id="recommd">
+        
+    </div>
+</div>
+
+            <div id="my-side" class="am-u-md-4  am-u-lg-4"> 
+                
+                <aside id="hot_article">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <img src="./ActFramework r1.3.0_files/leaf2.png" height="16" width="16" alt="点击排行" data-bd-imgshare-binded="1">&nbsp;&nbsp;点击排行
+                        </div>
+                        <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <span class="post-title">
+                                                <a title=" C#程序中设置全局代理的三种方法" href="http://huisky.com/blog/17012317393026" target="_blank">
+                                                    C#程序中设置全局代理的三种方法
+                                                </a>
+                                            </span>
+                                            <span class="badge">5424</span>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span class="post-title">
+                                                <a title="Winform下CefSharp的引用、配置、实例与报错排除" href="http://huisky.com/blog/16122515111968" target="_blank">
+                                                    Winform下CefSharp的引用、配置、实例与...
+                                                </a>
+                                            </span>
+                                            <span class="badge">4939</span>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span class="post-title">
+                                                <a title="基于asp.net mvc5的Chloe网站开源项目源码下载" href="http://huisky.com/blog/17010213290088" target="_blank">
+                                                    基于asp.net mvc5的Chloe网站开源项目源...
+                                                </a>
+                                            </span>
+                                            <span class="badge">1878</span>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span class="post-title">
+                                                <a title="iOS热更新技术被苹果官方警告？涉及到RN、Week、JSPatch！！！" href="http://huisky.com/blog/17030910073497" target="_blank">
+                                                    iOS热更新技术被苹果官方警告？涉及到R...
+                                                </a>
+                                            </span>
+                                            <span class="badge">1278</span>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span class="post-title">
+                                                <a title="Winform下使用FidderCore抓取Https内容的实例" href="http://huisky.com/blog/17011318182695" target="_blank">
+                                                    Winform下使用FidderCore抓取Https内容...
+                                                </a>
+                                            </span>
+                                            <span class="badge">1201</span>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span class="post-title">
+                                                <a title="Electron中Jquery的引入方式" href="http://huisky.com/blog/16122220522957" target="_blank">
+                                                    Electron中Jquery的引入方式
+                                                </a>
+                                            </span>
+                                            <span class="badge">979</span>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span class="post-title">
+                                                <a title="一个私有开源的百度网盘API的C#库(源码)" href="http://huisky.com/blog/17011210001318" target="_blank">
+                                                    一个私有开源的百度网盘API的C#库(源码)
+                                                </a>
+                                            </span>
+                                            <span class="badge">771</span>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span class="post-title">
+                                                <a title="44部ASP.Net、C#编程书籍PDF电子版打包下载" href="http://huisky.com/blog/17012022353523" target="_blank">
+                                                    44部ASP.Net、C#编程书籍PDF电子版打包下载
+                                                </a>
+                                            </span>
+                                            <span class="badge">739</span>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span class="post-title">
+                                                <a title="QQ互联账号申请与asp.netMVC4集成QQ一键登录" href="http://huisky.com/blog/17010223301147" target="_blank">
+                                                    QQ互联账号申请与asp.netMVC4集成QQ一键...
+                                                </a>
+                                            </span>
+                                            <span class="badge">652</span>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span class="post-title">
+                                                <a title="C#.net下SQLite3的下载、引用与SQLiteHelper数据库辅助类" href="http://huisky.com/blog/17012209072546" target="_blank">
+                                                    C#.net下SQLite3的下载、引用与SQLiteH...
+                                                </a>
+                                            </span>
+                                            <span class="badge">582</span>
+                                        </li>
+
+                        </ul>
+                    </div>
+                </aside>
+                
+                <aside id="typeList">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <img src="./ActFramework r1.3.0_files/pen3.png" height="16" width="16" alt="文章分类" data-bd-imgshare-binded="1"> &nbsp;&nbsp;文章分类
+                        </div>
+                        <div class="d_tags">
+                                        <a target="_blank" href="http://huisky.com/home/index?type2=30" title="Java">  Java (4103)</a>
+                                        <a target="_blank" href="http://huisky.com/home/index?type2=50" title="MySql">  MySql (3590)</a>
+                                        <a target="_blank" href="http://huisky.com/home/index?type2=167" title="Http">  Http (3053)</a>
+                                        <a target="_blank" href="http://huisky.com/home/index?type2=68" title="php">  php (2316)</a>
+                                        <a target="_blank" href="http://huisky.com/home/index?type2=37" title="Python">  Python (2201)</a>
+                                        <a target="_blank" href="http://huisky.com/home/index?type2=165" title="JS">  JS (2151)</a>
+                                        <a target="_blank" href="http://huisky.com/home/index?type2=40" title="Android">  Android (1601)</a>
+                                        <a target="_blank" href="http://huisky.com/home/index?type2=70" title="linux">  linux (1427)</a>
+                                        <a target="_blank" href="http://huisky.com/home/index?type2=95" title="github">  github (1360)</a>
+                                        <a target="_blank" href="http://huisky.com/home/index?type2=156" title=".NET">  .NET (1315)</a>
+                                        <a target="_blank" href="http://huisky.com/home/index?type2=66" title="jquery">  jquery (1244)</a>
+                                        <a target="_blank" href="http://huisky.com/home/index?type2=29" title="javascript">  javascript (1229)</a>
+                                        <a target="_blank" href="http://huisky.com/home/index?type2=146" title="算法">  算法 (1121)</a>
+                                        <a target="_blank" href="http://huisky.com/home/index?type2=51" title="Oracle">  Oracle (1051)</a>
+                                        <a target="_blank" href="http://huisky.com/home/index?type2=53" title="IOS">  IOS (1040)</a>
+                                        <a target="_blank" href="http://huisky.com/home/index?type2=54" title="Redis">  Redis (1015)</a>
+                                        <a target="_blank" href="http://huisky.com/home/index?type2=49" title="Vue">  Vue (975)</a>
+                                        <a target="_blank" href="http://huisky.com/home/index?type2=44" title="SQL Server">  SQL Server (899)</a>
+                                        <a target="_blank" href="http://huisky.com/home/index?type2=27" title="数据库">  数据库 (866)</a>
+                                        <a target="_blank" href="http://huisky.com/home/index?type2=152" title="node">  node (829)</a>
+                                        <a target="_blank" href="http://huisky.com/home/index?type2=31" title="C#">  C# (827)</a>
+                                        <a target="_blank" href="http://huisky.com/home/index?type2=138" title="APP">  APP (815)</a>
+                                        <a target="_blank" href="http://huisky.com/home/index?type2=7" title="Html">  Html (812)</a>
+                                        <a target="_blank" href="http://huisky.com/home/index?type2=58" title="React">  React (802)</a>
+                                        <a target="_blank" href="http://huisky.com/home/index?type2=118" title="rac">  rac (797)</a>
+                                        <a target="_blank" href="http://huisky.com/home/index?type2=91" title="nginx">  nginx (760)</a>
+                                        <a target="_blank" href="http://huisky.com/home/index?type2=46" title="设计模式">  设计模式 (755)</a>
+                                        <a target="_blank" href="http://huisky.com/home/index?type2=106" title="windows">  windows (753)</a>
+                                        <a target="_blank" href="http://huisky.com/home/index?type2=84" title="docker">  docker (739)</a>
+                                        <a target="_blank" href="http://huisky.com/home/index?type2=178" title="Go">  Go (738)</a>
+
+                        </div>
+                    </div>
+                </aside>
+                <aside class="am-hide-md am-hide-sm">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <img src="./ActFramework r1.3.0_files/yun2.png" height="13" width="16" alt="抽个签吧" data-bd-imgshare-binded="1">&nbsp;&nbsp;抽个签吧
+                        </div>
+                        <div id="tagbox">
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+
+                        <a target="_blank" class="color7" href="http://huisky.com/home/index?tag=Git" style="left: 36.5549px; top: 181.993px; font-size: 15px; opacity: 0.794985; z-index: 1;">Git</a><a target="_blank" class="color1" href="http://huisky.com/home/index?tag=linux" style="left: 61.3695px; top: 212.735px; font-size: 15px; opacity: 0.902718; z-index: 15;">linux</a><a target="_blank" class="color6" href="http://huisky.com/home/index?tag=sql" style="left: 82.4537px; top: 180.587px; font-size: 18px; opacity: 1.69828; z-index: 2;">sql</a><a target="_blank" class="color4" href="http://huisky.com/home/index?tag=javascript" style="left: 47.6913px; top: 131.718px; font-size: 18px; opacity: 1.70261; z-index: 3;">javascript</a><a target="_blank" class="color6" href="http://huisky.com/home/index?tag=redis" style="left: 14.3756px; top: 116.767px; font-size: 15px; opacity: 0.909265; z-index: 4;">redis</a><a target="_blank" class="color6" href="http://huisky.com/home/index?tag=android" style="left: 18.8268px; top: 142.89px; font-size: 14px; opacity: 0.436693; z-index: 5;">android</a><a target="_blank" class="color7" href="http://huisky.com/home/index?tag=MySQL" style="left: 51.5647px; top: 185.932px; font-size: 13px; opacity: 0.304342; z-index: 6;">MySQL</a><a target="_blank" class="color1" href="http://huisky.com/home/index?tag=Tomcat" style="left: 117.944px; top: 215.265px; font-size: 14px; opacity: 0.428296; z-index: 7;">Tomcat</a><a target="_blank" class="color7" href="http://huisky.com/home/index?tag=spring" style="left: 157.655px; top: 212.293px; font-size: 15px; opacity: 0.840929; z-index: 8;">spring</a><a target="_blank" class="color3" href="http://huisky.com/home/index?tag=iOS" style="left: 158.625px; top: 177.247px; font-size: 18px; opacity: 1.60444; z-index: 9;">iOS</a><a target="_blank" class="color1" href="http://huisky.com/home/index?tag=HTML" style="left: 132.092px; top: 125.801px; font-size: 20px; opacity: 2.2966; z-index: 10;">HTML</a><a target="_blank" class="color2" href="http://huisky.com/home/index?tag=Windows" style="left: 85.8974px; top: 79.9361px; font-size: 19px; opacity: 1.93886; z-index: 11;">Windows</a><a target="_blank" class="color3" href="http://huisky.com/home/index?tag=Maven" style="left: 40.5783px; top: 57.8797px; font-size: 16px; opacity: 1.08398; z-index: 12;">Maven</a><a target="_blank" class="color2" href="http://huisky.com/home/index?tag=html5" style="left: 29.6544px; top: 66.9284px; font-size: 14px; opacity: 0.505381; z-index: 13;">html5</a><a target="_blank" class="color5" href="http://huisky.com/home/index?tag=ASP.NET" style="left: 41.5558px; top: 101.213px; font-size: 13px; opacity: 0.221108; z-index: 14;">ASP.NET</a><a target="_blank" class="color4" href="http://huisky.com/home/index?tag=C#" style="left: 90.8926px; top: 144.601px; font-size: 13px; opacity: 0.13277; z-index: 0;">C#</a><a target="_blank" class="color5" href="http://huisky.com/home/index?tag=php" style="left: 135.673px; top: 177.327px; font-size: 13px; opacity: 0.201234; z-index: 16;">php</a><a target="_blank" class="color4" href="http://huisky.com/home/index?tag=%E5%85%B6%E4%BB%96" style="left: 182.498px; top: 183.903px; font-size: 14px; opacity: 0.446033; z-index: 17;">其他</a><a target="_blank" class="color5" href="http://huisky.com/home/index?tag=Java" style="left: 206.552px; top: 159.496px; font-size: 15px; opacity: 0.915812; z-index: 18;">Java</a><a target="_blank" class="color4" href="http://huisky.com/home/index?tag=GitHub" style="left: 192.053px; top: 112.424px; font-size: 17px; opacity: 1.49974; z-index: 19;">GitHub</a><a target="_blank" class="color2" href="http://huisky.com/home/index?tag=css" style="left: 153.977px; top: 61.4727px; font-size: 18px; opacity: 1.60108; z-index: 20;">css</a><a target="_blank" class="color6" href="http://huisky.com/home/index?tag=eclipse" style="left: 97.2867px; top: 28.4248px; font-size: 16px; opacity: 1.04875; z-index: 21;">eclipse</a><a target="_blank" class="color5" href="http://huisky.com/home/index?tag=docker" style="left: 77.5657px; top: 27.998px; font-size: 14px; opacity: 0.501463; z-index: 22;">docker</a><a target="_blank" class="color7" href="http://huisky.com/home/index?tag=mongodb" style="left: 92.6945px; top: 59.0761px; font-size: 13px; opacity: 0.206171; z-index: 23;">mongodb</a><a target="_blank" class="color1" href="http://huisky.com/home/index?tag=C++" style="left: 128.002px; top: 102.008px; font-size: 13px; opacity: 0.129662; z-index: 24;">C++</a><a target="_blank" class="color2" href="http://huisky.com/home/index?tag=nginx" style="left: 182.11px; top: 126.155px; font-size: 13px; opacity: 0.253992; z-index: 25;">nginx</a><a target="_blank" class="color3" href="http://huisky.com/home/index?tag=Oracle" style="left: 202.229px; top: 108.765px; font-size: 14px; opacity: 0.586225; z-index: 26;">Oracle</a><a target="_blank" class="color3" href="http://huisky.com/home/index?tag=Python" style="left: 179.497px; top: 59.2092px; font-size: 15px; opacity: 0.853497; z-index: 27;">Python</a><a target="_blank" class="color5" href="http://huisky.com/home/index?tag=node.js" style="left: 139.726px; top: 29.0471px; font-size: 14px; opacity: 0.548639; z-index: 28;">node.js</a><a target="_blank" class="color4" href="http://huisky.com/home/index?tag=CentOS" style="left: 161.227px; top: 61.0228px; font-size: 13px; opacity: 0.287797; z-index: 29;">CentOS</a></div>
+                    </div>
+                </aside>
+                
+            </div>
+        </div>
+        <footer class="blog-footer">
+            <div class="footer-link">
+                友情链接：
+                &nbsp;&nbsp; <a href="https://www.aliyun.com/">阿里云</a>
+                &nbsp;&nbsp; <a href="http://www.cnblogs.com/">博客园</a>
+                &nbsp;&nbsp; <a href="http://amazeui.org/">Amaze UI</a>
+                &nbsp;&nbsp; <a href="http://lusongsong.com/">卢松松博客</a>
+                &nbsp;&nbsp; <a href="http://www.zynblog.com/">zynblog</a>
+                &nbsp;&nbsp; <a href="http://www.cnblogs.com/123it">123IT</a>
+            </div>
+            <div class="footer-container">
+                ©2016 HuiSky&nbsp;&nbsp;版权所有&nbsp;&nbsp;
+                <a style="display:none" href="http://huisky.com/sitemap.xml" target="_blank">站点地图</a>
+                &nbsp;&nbsp;鲁ICP备16046880号-1
+                &nbsp;&nbsp;
+
+            </div>
+        </footer>
+    </div><script src="./ActFramework r1.3.0_files/_con"></script>
+    <!--[if lt IE 9]>
+    <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+    <script src="assets/js/amazeui.ie8polyfill.min.js"></script>
+    <![endif]-->
+    <script src="./ActFramework r1.3.0_files/js"></script>
+
+    <!--[if (gte IE 9)|!(IE)]><!-->
+    
+    <!--<![endif]-->
+    
+
+    <script type="text/javascript">
+        $().ready(function () {
+            $("#login").click(function () {
+                window.location.href = "/login";
+            });
+        });
+    </script>
+    
+    <script src="./ActFramework r1.3.0_files/jsblogQ"></script>
+
+    <script>//hljs.initHighlightingOnLoad();</script>
+    <script type="text/javascript" charset="utf-8">//$(function () { $("img.lazy").lazyload({ effect: "fadeIn" }); });</script> 
+    <!--百度分享-->
+    <script>//window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "2", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "24" }, "share": {}, "image": { "viewList": ["weixin", "qzone", "tsina", "tqq", "renren"], "viewText": "分享到：", "viewSize": "16" }, "selectShare": { "bdContainerClass": null, "bdSelectMiniList": ["weixin", "qzone", "tsina", "tqq", "renren"] } }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+    
+
+    
+
+    
+    
+
+    <!--baidupush-->
+        <script>
+            /*(function () {
+                var bp = document.createElement('script');
+                var curProtocol = window.location.protocol.split(':')[0];
+                if (curProtocol === 'https') {
+                    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+                } else {
+                    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+                }
+                var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(bp, s);
+            })();*/
+        </script>
+
+
+<iframe frameborder="0" id="bdSharePopup_selectshare1502258509459bg" class="bdselect_share_bg" style="display:none;" src="./ActFramework r1.3.0_files/saved_resource.html"></iframe><div id="bdSharePopup_selectshare1502258509459box" style="display:none;" share-type="selectshare" class="bdselect_share_box" data-bd-bind="1502258509458"><div class="selectshare-mod-triangle"><div class="triangle-border"></div><div class="triangle-inset"></div></div><div class="bdselect_share_head"><span>分享到</span><a href="http://www.baidu.com/s?wd=&amp;tn=SE_hldp08010_vurs2xrp" class="bdselect_share_dialog_search" target="_blank"><i class="bdselect_share_dialog_search_i"></i><span class="bdselect_share_dialog_search_span">百度一下</span></a><a class="bdselect_share_dialog_close"></a></div><div class="bdselect_share_content"><ul class="bdselect_share_list bdshare-button-style0-24"><div class="bdselect_share_partners"></div><a href="http://huisky.com/blog/17050219105882#" class="bds_more" data-cmd="more"></a></ul></div></div><div id="bdimgshare_1502258509469" class="sr-bdimgshare sr-bdimgshare-list sr-bdimgshare-16 sr-bdimgshare-black" style="height:36px;line-height:26px;font-size:12px;width:autopx;display:none;" data-bd-bind="1502258509468"><div class="bdimgshare-bg"></div><div class="bdimgshare-content bdsharebuttonbox bdshare-button-style0-16"><label class="bdimgshare-lbl">分享到：</label><a href="http://huisky.com/blog/17050219105882#" onclick="return false;" class="bds_weixin" data-cmd="weixin" hidefocus=""></a><a href="http://huisky.com/blog/17050219105882#" onclick="return false;" class="bds_qzone" data-cmd="qzone" hidefocus=""></a><a href="http://huisky.com/blog/17050219105882#" onclick="return false;" class="bds_tsina" data-cmd="tsina" hidefocus=""></a><a href="http://huisky.com/blog/17050219105882#" onclick="return false;" class="bds_tqq" data-cmd="tqq" hidefocus=""></a><a href="http://huisky.com/blog/17050219105882#" onclick="return false;" class="bds_renren" data-cmd="renren" hidefocus=""></a><a href="http://huisky.com/blog/17050219105882#" onclick="return false;" class="bds_more" data-cmd="more" hidefocus=""></a></div></div></body></html>
