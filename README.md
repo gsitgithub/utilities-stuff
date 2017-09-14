@@ -54,7 +54,7 @@ http://yajsw.sourceforge.net/ , http://nssm.cc/
 
 
 #Handlebars
-https://stackoverflow.com/questions/10037936/node-js-with-handlebars-js-on-server-and-client-problem
+https://stackoverflow.com/questions/10037936/node-js-with-handlebars-js-on-server-and-client problem
 You should use pre-compiled client templates. They are faster executing and allow you to use the same template language on the server and client.
     Install handlebars globally npm install handlebars -g
     Precompile your templates handlebars client-template1.handlebars -f templates.js
@@ -62,6 +62,8 @@ You should use pre-compiled client templates. They are faster executing and allo
     Execute the template var html = Handlebars.templates["client-template1"](context);
 https://stackoverflow.com/a/13884587/8360
 https://gist.github.com/utsengar/2287070
+http://berzniz.com/post/24743062344/handling-handlebarsjs-like-a-pro
+http://www.korenlc.com/precompiling-handlebars-templates/
 <script> 
     $(function(){
       var postData={title: "My New Post", content: "This is my first post!"};
