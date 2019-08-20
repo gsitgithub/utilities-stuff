@@ -1,11 +1,17 @@
-﻿https://vpsfree.org
+﻿teamos: milox milox@heximail (milox@heximail.com)
+jhipster: fusamotepu@mymailbest.com (fusamotepu@mymailbest)
+have a sparse working copy:-
+c:\> svn update --set-depth infinity
+The equivalent in Tortoise is setting Update Depth to "Fully recursive" when you pull up the Update/(update to revision) dialog.
+
+https://vpsfree.org
 https://vestacp.com/
-http://browserstack.com  -  vuyec@7rent.top :  , matidi@pavilionx2.com : 
+http://browserstack.com
+ vuyec@7rent.top : admin123 , matidi@pavilionx2.com : matidi
 
 Good analysis. People rush to “optimize the code” but they don’t bother to measure or look for the best algorithm.
 Bug Hunting
 https://amybughunter.files.wordpress.com/2013/01/defect_tracking_decide1.jpg
-
 
 # mssql jdbc driver installation in maven for now on Nexus repository
 mvn install:install-file -Dfile=sqljdbc4.jar -Dpackaging=jar -DgroupId=com.microsoft.sqlserver -DartifactId=sqljdbc4 -Dversion=4.0
@@ -60,13 +66,10 @@ Softwares 					Servlet version		JSP	 		min Java
 18. jackson 2.8.x and up                                    JRE 7 or above
 
 
-DI: https://github.com/zsoltherpai/feather | https://github.com/google/tiger | https://github.com/osglworks/java-di
-Reflection: https://github.com/EsotericSoftware/reflectasm
-Converter : https://github.com/brettwooldridge/HikariJSON
-MVC       : https://github.com/actframework/actframework, https://github.com/osglworks/java-mvc
-
 tomcat 8 vs 8.5 >> Locale: "en-US, en" vs "en-US" >> 8.5 Tomcat's cookie processing being changed to a RFC 6265 compliant implementation by default in 8.5, which does not allow space (character 32), among others.
 <CookieProcessor className="org.apache.tomcat.util.http.LegacyCookieProcessor" />
+
+COMODO SECURE DNS Servers: primary/secondary  8.26.56.26/8.20.247.20   , donot use if using vpn
 
 Command alias- Cmdlet name Poweshell  -    	Description of command
 %	     -    ForEach-Object	    -    	Performs an operation against each item in a collection of input objects.
